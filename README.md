@@ -2,9 +2,9 @@
 <h2 align="center">Лабараторная работа №1, вариант 18 </h2>
 
 ---
-> Task: Write a program that reads text from a file, displays it on the screen, removing unnecessary spaces in each even sentence.
+> __Task__: Write a program that reads text from a file, displays it on the screen, removing unnecessary spaces in each even sentence.
 > 
-> Задание: Написать программу, которая читая текст  из файла, выводит его на экран, убирая лишние пробелы в каждом четном предложении. 
+> __Задание__: Написать программу, которая читая текст  из файла, выводит его на экран, убирая лишние пробелы в каждом четном предложении. 
 
 ---
 #### __Stages of the program__ \ _Этапы работы программы_:
