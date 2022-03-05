@@ -18,6 +18,6 @@ try:
                             and line_txt[index_symbol_txt + 1] in punctuation_marks:
                         continue
                 print(line_txt[index_symbol_txt], end='')
-            print(line_txt[len(line_txt)-1], end='')
+            print()
 except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
