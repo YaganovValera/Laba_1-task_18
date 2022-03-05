@@ -4,16 +4,18 @@
    Выполнил: Яганов Валерий ИСТбд-11
 """
 with open('test.txt', encoding="utf8") as file:
-    parity_of_the_sentence = False
-    for sentence_txt in file:
-        for symbol_txt in range(0, len(sentence_txt) - 1):
-            if sentence_txt[symbol_txt] in ['.', '?', '!']:                      # Finding the end of the sentence
-                parity_of_the_sentence = not parity_of_the_sentence              # Determine the parity of the sentence
-            if parity_of_the_sentence:
-                if sentence_txt[symbol_txt] == ' ' and sentence_txt[symbol_txt+1] == ' ':
+    punctuation_marks = ['.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»'] #знаки препинания
+    parity_of_the_sentence = False                         # controls parity \ контролирует четность
+    for line_txt in file:
+        for index_symbol_txt in range(0, len(line_txt) - 1):
+            if line_txt[index_symbol_txt] in ['.', '?', '!']:    # Finding the end of the sentence\ находим конец предложения
+                parity_of_the_sentence = not parity_of_the_sentence    # Determine the parity of the sentence \ определяем четность
+            if parity_of_the_sentence:                                 # processing an even sentence \ обработка четного предложения
+                if line_txt[index_symbol_txt] == ' ' and line_txt[index_symbol_txt+1] == ' ':
                     continue
-                if sentence_txt[symbol_txt] == ' ' \
-                        and sentence_txt[symbol_txt + 1] in ['.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»']:
+                if line_txt[index_symbol_txt] == ' ' \
+                        and line_txt[index_symbol_txt + 1] in punctuation_marks:
                     continue
-            print(sentence_txt[symbol_txt], end='')
-        print(sentence_txt[len(sentence_txt)-1], end='')
+            print(line_txt[index_symbol_txt], end='')
+        print(line_txt[len(line_txt)-1], end='')
+
