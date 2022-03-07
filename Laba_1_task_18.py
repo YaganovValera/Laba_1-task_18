@@ -4,7 +4,7 @@
    Выполнил: Яганов Валерий ИСТбд-11
 """
 try:
-    with open('test.txt', encoding="utf8") as file:
+    with open('test.txt', "r", encoding="utf8") as file:
         punctuation_marks = ['.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»']  # знаки препинания
         parity_of_the_sentence = False                                                 # controls parity \ контролирует четность
         for line_txt in file:
