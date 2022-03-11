@@ -4,7 +4,8 @@
    Выполнил: Яганов Валерий ИСТбд-11
 """
 try:
-    with open('test.txt', "r", encoding="utf8") as file:
+    file_name = "test.txt"
+    with open(file_name, "r", encoding="utf8") as file:
         punctuation_marks = ['.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»']  # знаки препинания
         parity_of_the_sentence = False                                                 # controls parity \ контролирует четность
         for line_txt in file:
@@ -18,6 +19,6 @@ try:
                             and line_txt[index_symbol_txt + 1] in punctuation_marks:
                         continue
                 print(line_txt[index_symbol_txt], end='')
-            print()
+            print()                                           # end of paragraph (switching to a new line)\ завершает абзац (переход на новую строку)
 except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
