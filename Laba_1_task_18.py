@@ -8,17 +8,10 @@ try:
         punctuation_marks = ['.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»']  # знаки препинания
         parity_of_the_sentence = False                                                 # controls parity \ контролирует четность
         for line_txt in file:
-            paragraph = True                                                           # responsible for the paragraph \ отвечает за абзац
             for index_symbol_txt in range(0, len(line_txt) - 1):
                 if line_txt[index_symbol_txt] in ['.', '?', '!']:                      # Finding the end of the sentence\ находим конец предложения
                     parity_of_the_sentence = not parity_of_the_sentence                # Determine the parity of the sentence \ определяем четность
                 if parity_of_the_sentence:                                             # processing an even sentence \ обработка четного предложения
-                    if index_symbol_txt < 3:                                           # Checking for spaces in a paragraph \ Проверка пробелов в абзаце
-                        if paragraph and line_txt[index_symbol_txt] == ' ':
-                            print(line_txt[index_symbol_txt], end='')
-                            continue
-                        else:
-                            paragraph = False
                     if line_txt[index_symbol_txt] == ' ' and line_txt[index_symbol_txt+1] == ' ':
                         continue
                     if line_txt[index_symbol_txt] == ' ' \
