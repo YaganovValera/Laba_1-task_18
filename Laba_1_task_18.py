@@ -6,11 +6,11 @@
 try:
     file_name = "test.txt"
     with open(file_name, "r", encoding="utf8") as file:
-        punctuation_marks = ['.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»']  # знаки препинания
+        punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»')  # знаки препинания
         parity_of_the_sentence = False                                                 # controls parity \ контролирует четность
         for line_txt in file:
-            for index_symbol_txt in range(0, len(line_txt) - 1):
-                if line_txt[index_symbol_txt] in ['.', '?', '!']:                      # Finding the end of the sentence\ находим конец предложения
+            for index_symbol_txt in range(0, len(line_txt)):
+                if line_txt[index_symbol_txt] in ('.', '?', '!'):                      # Finding the end of the sentence\ находим конец предложения
                     parity_of_the_sentence = not parity_of_the_sentence                # Determine the parity of the sentence \ определяем четность
                 if parity_of_the_sentence:                                             # processing an even sentence \ обработка четного предложения
                     if line_txt[index_symbol_txt] == ' ' and line_txt[index_symbol_txt+1] == ' ':
@@ -19,6 +19,6 @@ try:
                             and line_txt[index_symbol_txt + 1] in punctuation_marks:
                         continue
                 print(line_txt[index_symbol_txt], end='')
-            print()                                           # end of paragraph (switching to a new line)\ завершает абзац (переход на новую строку)
+            #print()                                           # end of paragraph (switching to a new line)\ завершает абзац (переход на новую строку)
 except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
