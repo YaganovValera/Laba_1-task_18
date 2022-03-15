@@ -19,6 +19,5 @@ try:
                             and line_txt[index_symbol_txt + 1] in punctuation_marks:
                         continue
                 print(line_txt[index_symbol_txt], end='')
-            #print()                                           # end of paragraph (switching to a new line)\ завершает абзац (переход на новую строку)
 except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
