@@ -12,7 +12,7 @@
 1. __With the help of punctuation marks that stand at the end of the sentence, we determine the parity of the sentence.__ \ _С помощью знаков препинания, которые стоят в конце предложения, определяем четность предложения._
 ```python
     parity_of_the_sentence = False  
-    if line_txt[index_symbol_txt] in ('.', '?', '!'):                     
+    if line_txt[index_symbol_txt] in ('.', '?', '!', '…'):                     
         parity_of_the_sentence = not parity_of_the_sentence
 ```
 2. __If the sentence is even, then we start editing this sentence.__ \ _Если предложение четное, то начинаем редактировать это предложение_:
@@ -23,7 +23,7 @@
       ```
    2. __We skip spaces before punctuation marks.__ \ _Пропускаем пробелы перед знаками препинания._
       ```python
-       punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»')
+       punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…')
        if line_txt[index_symbol_txt] == ' ' and line_txt[index_symbol_txt + 1] in punctuation_marks:
            continue
        ```
