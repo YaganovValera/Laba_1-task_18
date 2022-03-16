@@ -21,7 +21,7 @@
        if line_txt[index_symbol_txt] == ' ' and line_txt[index_symbol_txt+1] == ' ':
            continue
       ```
-   2. __We skip spaces before punctuation marks.__ \ _Пропускаем пробелы перед знаками препинания._
+   2. __Skip spaces before punctuation marks.__ \ _Пропускаем пробелы перед знаками препинания._
       ```python
        punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…')
        if line_txt[index_symbol_txt] == ' ' and line_txt[index_symbol_txt + 1] in punctuation_marks:
