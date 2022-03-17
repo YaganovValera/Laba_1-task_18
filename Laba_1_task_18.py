@@ -5,6 +5,7 @@
 """
 
 import time
+import os
 
 start = time.monotonic()                                                               # Запуск таймера
 try:
@@ -29,3 +30,6 @@ except FileNotFoundError:
 result = time.monotonic() - start                                                        # Отключение таймера
 print('\n')
 print("Время работы программы: {:>.3f}".format(result))
+
+folder_size = os.path.getsize('Laba_1_task_18.py')
+print("Размер файла: ", folder_size)
