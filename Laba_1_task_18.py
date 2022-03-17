@@ -3,8 +3,12 @@
    Программа, которая читает текст  из файла, выводит его на экран, убирая лишние пробелы в каждом четном предложении.
    Выполнил: Яганов Валерий ИСТбд-11
 """
+
+import time
+
+start = time.monotonic()                                                               # Запуск таймера
 try:
-    file_name = "text.txt"
+    file_name = "test.txt"
     with open(file_name, "r", encoding="utf8") as file:
         punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…')  # знаки препинания
         parity_of_the_sentence = False                                                 # controls parity \ контролирует четность
@@ -21,3 +25,7 @@ try:
                 print(line_txt[index_symbol_txt], end='')
 except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
+
+result = time.monotonic() - start                                                        # Отключение таймера
+print('\n')
+print("Время работы программы: {:>.3f}".format(result))
