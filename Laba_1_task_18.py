@@ -3,33 +3,39 @@
    Программа, которая читает текст  из файла, выводит его на экран, убирая лишние пробелы в каждом четном предложении.
    Выполнил: Яганов Валерий ИСТбд-11
 """
-
 import time
-import os
 
 start = time.monotonic()                                                               # Запуск таймера
+
 try:
-    file_name = "test.txt"
+    file_name = "test.txt"                                                                 # название файла
     with open(file_name, "r", encoding="utf8") as file:
-        punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…')  # знаки препинания
-        parity_of_the_sentence = False                                                 # controls parity \ контролирует четность
-        for line_txt in file:
-            for index_symbol_txt in range(0, len(line_txt)):
-                if line_txt[index_symbol_txt] in ('.', '?', '!', '…'):                      # Finding the end of the sentence\ находим конец предложения
-                    parity_of_the_sentence = not parity_of_the_sentence                # Determine the parity of the sentence \ определяем четность
-                if parity_of_the_sentence:                                             # processing an even sentence \ обработка четного предложения
-                    if line_txt[index_symbol_txt] == ' ' and line_txt[index_symbol_txt+1] == ' ':
-                        continue
-                    if line_txt[index_symbol_txt] == ' ' \
-                            and line_txt[index_symbol_txt + 1] in punctuation_marks:
-                        continue
-                print(line_txt[index_symbol_txt], end='')
+
+        punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…')     # знаки препинания
+        parity_of_the_sentence = False                                                  # контролирует четность предложения
+        number_of_elements = 1                                                          # количество считываемых элементов
+        flag_correct_space = True                                                       # флаг отвечающий за правильность пробела
+
+        elements_1 = file.read(number_of_elements)                                      # первый элемент из файла
+        elements_2 = file.read(number_of_elements)                                      # элемент идущий за element_1
+
+        while elements_1:                                                          # Проверка на наличие элементов в файле
+            if elements_1 in ('.', '?', '!', '…'):                                 # находим конец предложения
+                parity_of_the_sentence = not parity_of_the_sentence                # изменяем четность предложения на нечетность, и наоборот
+            if parity_of_the_sentence:                                             # обработка четного предложения
+                if elements_1 == ' ' and elements_2 == ' ':                        # Пропускаем повторяющие пробелы
+                    flag_correct_space = False
+                if elements_1 == ' ' and elements_2 in punctuation_marks:          # Пропускаем пробелы перед знаками препинания
+                    flag_correct_space = False
+            if flag_correct_space:                                                 # проверка на необходимость пробела
+                print(elements_1, end='')
+            elements_1 = elements_2
+            elements_2 = file.read(number_of_elements)
+            flag_correct_space = True
 except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
 
 result = time.monotonic() - start                                                        # Отключение таймера
-print('\n')
-print("Время работы программы: {:>.3f}".format(result))
+print("\n\nВремя работы программы: {:>.10f}".format(result))
 
-folder_size = os.path.getsize('Laba_1_task_18.py')
-print("Размер файла: ", folder_size)
+
