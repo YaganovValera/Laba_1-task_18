@@ -12,20 +12,20 @@
 1. __With the help of punctuation marks that stand at the end of the sentence, we determine the parity of the sentence.__ \ _С помощью знаков препинания, которые стоят в конце предложения, определяем четность предложения._
 ```python
     parity_of_the_sentence = False  
-    if line_txt[index_symbol_txt] in ('.', '?', '!', '…'):                     
-        parity_of_the_sentence = not parity_of_the_sentence
+    if elements_1 in ('.', '?', '!', '…'):                       
+        parity_of_the_sentence = not parity_of_the_sentence                
 ```
 2. __If the sentence is even, then we start editing this sentence.__ \ _Если предложение четное, то начинаем редактировать это предложение_:
    1. __Skip consecutive spaces__ \ _Пропускаем подряд идущие пробелы._
        ```python
-       if line_txt[index_symbol_txt] == ' ' and line_txt[index_symbol_txt+1] == ' ':
-           continue
+        if elements_1 == ' ' and elements_2 == ' ':                 
+            flag_correct_space = False
       ```
    2. __Skip spaces before punctuation marks.__ \ _Пропускаем пробелы перед знаками препинания._
       ```python
        punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…')
-       if line_txt[index_symbol_txt] == ' ' and line_txt[index_symbol_txt + 1] in punctuation_marks:
-           continue
+       if elements_1 == ' ' and elements_2 in punctuation_marks:          
+           flag_correct_space = False
        ```
 3. __If the sentence is odd, then just output the sentence.__ \ _Если предложение нечетное, то просто выводим предложение._
 
