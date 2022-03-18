@@ -8,9 +8,8 @@ import time
 start = time.monotonic()                                                               # Запуск таймера
 
 try:
-    file_name = "test.txt"                                                                 # название файла
+    file_name = "test_2.txt"                                                             # название файла
     with open(file_name, "r", encoding="utf8") as file:
-
         punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…')     # знаки препинания
         parity_of_the_sentence = False                                                  # контролирует четность предложения
         number_of_elements = 1                                                          # количество считываемых элементов
@@ -18,6 +17,9 @@ try:
 
         elements_1 = file.read(number_of_elements)                                      # первый элемент из файла
         elements_2 = file.read(number_of_elements)                                      # элемент идущий за element_1
+
+        if not elements_1:  # если файл пустой
+            print(f"\nФайл {file_name} в директории проекта пустой.\nДобавьте не пустой файл в директорию или переименуйте существующий *.txt файл.")
 
         while elements_1:                                                          # Проверка на наличие элементов в файле
             if elements_1 in ('.', '?', '!', '…'):                                 # находим конец предложения
@@ -32,10 +34,11 @@ try:
             elements_1 = elements_2
             elements_2 = file.read(number_of_elements)
             flag_correct_space = True
+
 except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
 
-result = time.monotonic() - start                                                        # Отключение таймера
+result = time.monotonic() - start                                                   # Отключение таймера
 print("\n\nВремя работы программы: {:>.10f}".format(result))
 
 
