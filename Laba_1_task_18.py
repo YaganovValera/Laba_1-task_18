@@ -4,41 +4,73 @@
    Выполнил: Яганов Валерий ИСТбд-11
 """
 import time
+import os.path
 
-start = time.monotonic()                                                               # Запуск таймера
+start = time.time()                                                                        # Запуск таймера
 
 try:
-    file_name = "test_2.txt"                                                             # название файла
+    file_name = "test_7.txt"                                                               # название файла
     with open(file_name, "r", encoding="utf8") as file:
-        punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…')     # знаки препинания
-        parity_of_the_sentence = False                                                  # контролирует четность предложения
-        number_of_elements = 1                                                          # количество считываемых элементов
-        flag_correct_space = True                                                       # флаг отвечающий за правильность пробела
 
-        elements_1 = file.read(number_of_elements)                                      # первый элемент из файла
-        elements_2 = file.read(number_of_elements)                                      # элемент идущий за element_1
+        digits = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+        punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…') # знаки препинания
+        parity_of_the_sentence = False                                                     # контролирует четность предложения
+        number_of_elements = 1                                                             # количество считываемых элементов
+        flag_correct_element = True                                                        # флаг отвечающий за корректность элементов (следит за лишними пробелами)
 
-        if not elements_1:  # если файл пустой
+        paragraph = False                                                                  # флаг отвечающий за абзац в четном предложение
+        max_space_in_paragraph = 3                                                         # максимальное кол-во пробелов в абзаце
+        space_counter_in_a_paragraph = 0                                                   # счетчик пробелов в абзаце
+
+        float_number = True                                                                # Отвечает за числа с плавающей точкой
+        flag_float_number = False                                                          # Отвечает за то, чтобы программа не считала точку в числах концом предложения
+
+        elements_1 = file.read(number_of_elements)                                         # первый элемент из файла
+        elements_2 = file.read(number_of_elements)                                         # элемент идущий за element_1
+
+        if not elements_1:                                                                 # если файл пустой
             print(f"\nФайл {file_name} в директории проекта пустой.\nДобавьте не пустой файл в директорию или переименуйте существующий *.txt файл.")
 
-        while elements_1:                                                          # Проверка на наличие элементов в файле
-            if elements_1 in ('.', '?', '!', '…'):                                 # находим конец предложения
-                parity_of_the_sentence = not parity_of_the_sentence                # изменяем четность предложения на нечетность, и наоборот
-            if parity_of_the_sentence:                                             # обработка четного предложения
-                if elements_1 == ' ' and elements_2 == ' ':                        # Пропускаем повторяющие пробелы
-                    flag_correct_space = False
-                if elements_1 == ' ' and elements_2 in punctuation_marks:          # Пропускаем пробелы перед знаками препинания
-                    flag_correct_space = False
-            if flag_correct_space:                                                 # проверка на необходимость пробела
+        while elements_1:                                                                  # Проверка на наличие элементов в файле
+
+            if elements_1 == '.' and elements_2 in digits and float_number:                # если это число с плавающей точкой то точку не считаем концом предложения
+                flag_float_number = True
+
+            if elements_1 in ('.', '?', '!', '…') and not flag_float_number:               # находим конец предложения
+                parity_of_the_sentence = not parity_of_the_sentence                        # изменяем четность предложения на нечетность, и наоборот
+                if elements_2 == '\n' and parity_of_the_sentence:                          # Если следующие предложение четное и переходит на новою строку, то рассматриваем на наличие абзаца в нем
+                    paragraph = True
+
+            if parity_of_the_sentence and not (elements_1 in ('.', '?', '!', '…', '\n')):  # обработка четного предложения, без учета знаков препинания (для того чтобы не сбить проверку на абзац)
+                if not (paragraph and elements_1 == ' ' and space_counter_in_a_paragraph < max_space_in_paragraph):     # Если начало предложения не является абзацем, то обрабатываем его
+                    if elements_1 == ' ' and elements_2 == ' ':                            # Пропускаем повторяющие пробелы
+                        flag_correct_element = False
+                    if elements_1 == ' ' and (elements_2 in punctuation_marks):            # Пропускаем пробелы перед знаками препинания
+                        flag_correct_element = False
+                    paragraph = False                                                      # Сбрасываем проверку на абзац
+                    space_counter_in_a_paragraph = 0                                       # Сбрасываем проверку на абзац
+                else:
+                    space_counter_in_a_paragraph += 1                                      # Счет пробелов в абзаце
+
+            if flag_correct_element:                                                       # проверка на необходимость пробела и других элементов
                 print(elements_1, end='')
+
+            flag_float_number = False
+            float_number = False
+
+            if elements_1 in digits and elements_2 == '.':                                 # проверка на число с плавающей точкой
+                float_number = True
+
             elements_1 = elements_2
             elements_2 = file.read(number_of_elements)
-            flag_correct_space = True
+            flag_correct_element = True
+            flag_float_number = False
+
+    print("\n\n Размер файла с текстом:", os.path.getsize(file_name)/1024, "KB")
 
 except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
 
-result = time.monotonic() - start                                                   # Отключение таймера
-print("\n\nВремя работы программы: {:>.10f}".format(result))
-
-
+result = time.time() - start                                                            # Отключение таймера
+print("\n Размер кода:", os.path.getsize('Laba_1_task_18.py')/1024, "KB")
+print(" Время работы программы: {:>.10f}".format(result))
