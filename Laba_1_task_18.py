@@ -72,5 +72,4 @@ except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
 
 result = time.time() - start                                                            # Отключение таймера
-print("\n Размер кода:", os.path.getsize('Laba_1_task_18.py')/1024, "KB")
 print(" Время работы программы: {:>.10f}".format(result))
