@@ -9,7 +9,7 @@ import os.path
 start_0 = time.time()                                                                        # Запуск таймера
 
 try:
-    file_name = "test_1.txt"                                                               # название файла
+    file_name = "test_7.txt"                                                               # название файла
     with open(file_name, "r", encoding="utf8") as file:
 
         digits = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
