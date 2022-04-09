@@ -39,7 +39,7 @@ try:
 
         if not elements_1:                                                                 # если файл пустой
             print(f"\nФайл {file_name} в директории проекта пустой.\nДобавьте не пустой файл в директорию или переименуйте существующий *.txt файл.")
-        start_1 = time.time()
+            
         while elements_1:                                                                  # Проверка на наличие элементов в файле
             if elements_1 == '.' and elements_2 in digits and float_number:                # если это число с плавающей точкой то точку не считаем концом предложения
                 flag_float_number = True
@@ -70,7 +70,6 @@ try:
             elements_2 = file.read(number_of_elements)
             flag_correct_element = True
             flag_float_number = False
-        result_1 = time.time() - start_1
 
     print("\n\n Размер файла с текстом: {:>.4f} MB".format(os.path.getsize(file_name)/1024/1024))
 except FileNotFoundError:
@@ -79,4 +78,3 @@ except FileNotFoundError:
 
 result_0 = time.time() - start_0                                                            # Отключение таймера
 print(" Время работы всей программы: {:>.10f} sec.".format(result_0))
-print(" Время работы кода, который отвечает за обработку и вывод предложений из файла: {:>.10f} sec.".format(result_1))
