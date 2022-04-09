@@ -39,7 +39,7 @@ try:
 
         if not elements_1:                                                                 # если файл пустой
             print(f"\nФайл {file_name} в директории проекта пустой.\nДобавьте не пустой файл в директорию или переименуйте существующий *.txt файл.")
-            
+
         while elements_1:                                                                  # Проверка на наличие элементов в файле
             if elements_1 == '.' and elements_2 in digits and float_number:                # если это число с плавающей точкой то точку не считаем концом предложения
                 flag_float_number = True
