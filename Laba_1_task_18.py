@@ -4,14 +4,23 @@
    Выполнил: Яганов Валерий ИСТбд-11
 """
 import time
-import os.path
+import sys, locale, os.path
+
+file_name = "test_7.txt"
+
+code = sys.getfilesystemencoding()
+# Проверка на кодирование файла
+try:
+    with open(file_name, 'r', encoding=code) as file:
+        item = file.read(1)
+except Exception:
+    code = locale.getpreferredencoding()
 
 start_0 = time.time()                                                                        # Запуск таймера
 
 try:
-    file_name = "test_7.txt"                                                               # название файла
-    with open(file_name, "r", encoding="utf8") as file:
-
+                                                                   # название файла
+    with open(file_name, "r", encoding=code) as file:
         digits = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
         punctuation_marks = ('.', '!', ',', '?', ':', ';', ')', '(', '\'', '\"', '»', '…') # знаки препинания
         parity_of_the_sentence = False                                                     # контролирует четность предложения
@@ -51,7 +60,6 @@ try:
                     space_counter_in_a_paragraph += 1                                      # Счет пробелов в абзаце
             if flag_correct_element:                                                       # проверка на необходимость пробела и других элементов
                 print(elements_1, end='')
-
             flag_float_number = False
             float_number = False
 
@@ -65,7 +73,6 @@ try:
         result_1 = time.time() - start_1
 
     print("\n\n Размер файла с текстом: {:>.4f} MB".format(os.path.getsize(file_name)/1024/1024))
-
 except FileNotFoundError:
     print("\nФайл не обнаружен.\nДобавьте файл в директорию или переименуйте существующий файл.")
 
